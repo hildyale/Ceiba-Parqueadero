@@ -5,13 +5,13 @@ pipeline {
 	}
 	
 	options {
-		//Mantener artefactos y salida de consola para el # espec�fico de ejecuciones recientes del Pipeline.
+		//Mantener artefactos y salida de consola para el # especï¿½fico de ejecuciones recientes del Pipeline.
 		buildDiscarder(logRotator(numToKeepStr: '5')) 
 		//No permitir ejecuciones concurrentes de Pipeline
 		disableConcurrentBuilds() 
 	}
 	
-	 //Una sección que define las herramientas para “autoinstalar” y poner en la PATH
+	 //Una secciÃ³n que define las herramientas para â€œautoinstalarâ€� y poner en la PATH
 	tools {
 		jdk 'JDK8_Centos'
 		gradle 'Gradle4.5_Centos'
@@ -43,7 +43,7 @@ pipeline {
 		stage('Unit Tests') {
 			steps{
 				echo "------------>Unit Tests<------------"
-				sh 'gradle --b ./build.gradle test'
+				sh 'gradle test'
 				junit '**/build/test-results/test/*.xml' //aggregate test results - JUnit
 			}
 		}
