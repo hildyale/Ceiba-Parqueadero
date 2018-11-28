@@ -43,7 +43,7 @@ pipeline {
 		stage('Unit Tests') {
 			steps{
 				echo "------------>Unit Tests<------------"
-				sh 'gradle test'
+				sh 'gradle --stacktrace test'
 				junit '**/build/test-results/test/*.xml' //aggregate test results - JUnit
 			}
 		}
