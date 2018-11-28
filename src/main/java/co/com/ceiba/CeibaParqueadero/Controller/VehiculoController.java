@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.com.ceiba.CeibaParqueadero.Exception.ParqueaderoException;
-import co.com.ceiba.CeibaParqueadero.Modelo.Vehiculo;
-import co.com.ceiba.CeibaParqueadero.Repository.VehiculoRepository;
+import co.com.ceiba.CeibaParqueadero.Persistencia.Modelo.Vehiculo;
+import co.com.ceiba.CeibaParqueadero.Persistencia.Repository.VehiculoRepository;
 
 @RestController
 @RequestMapping("/vehiculos")

@@ -10,8 +10,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import co.com.ceiba.CeibaParqueadero.Exception.ParqueaderoException;
-import co.com.ceiba.CeibaParqueadero.Modelo.Vehiculo;
-import co.com.ceiba.CeibaParqueadero.Repository.VehiculoRepository;
+import co.com.ceiba.CeibaParqueadero.Persistencia.Modelo.Vehiculo;
+import co.com.ceiba.CeibaParqueadero.Persistencia.Repository.VehiculoRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

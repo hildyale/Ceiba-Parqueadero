@@ -1,60 +1,23 @@
-package co.com.ceiba.CeibaParqueadero.Modelo;
+package co.com.ceiba.CeibaParqueadero.Dominio.Modelo;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotBlank;
-
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-@Entity
-@Table(name = "vehiculo")
-@EntityListeners(AuditingEntityListener.class)
 public class Vehiculo {
 	
-	@Id
 	private String placa;
-	
-	@NotBlank
-	@Column(nullable = false)
 	private String tipo; 
-	
-	@Column(nullable = false)
 	private int cilindraje;
-	
-	@NotBlank
-	@Column(nullable = false)
 	private String color;
-	
-	
 	private String modelo;
-	
-	@NotBlank
-	@Column(nullable = false)
 	private String marca;
-	
-	@NotBlank
-	@Column(nullable = false)
 	private String clase;
-	
-	@CreatedDate
-	@Column(nullable = false)
-	@Temporal(TemporalType.TIMESTAMP)
 	private Date FechaIngreso;
 	
 	public Vehiculo() {
-		
+			
 	}
-
-	public Vehiculo(String placa, @NotBlank String tipo, int cilindraje, @NotBlank String color, @NotBlank String marca,
-			@NotBlank String clase) {
+	
+	public Vehiculo(String placa, String tipo, int cilindraje, String color, String marca, String clase) {
 		super();
 		this.placa = placa;
 		this.tipo = tipo;
@@ -63,7 +26,6 @@ public class Vehiculo {
 		this.marca = marca;
 		this.clase = clase;
 	}
-
 
 	public String getPlaca() {
 		return placa;
@@ -104,7 +66,7 @@ public class Vehiculo {
 	public void setModelo(String modelo) {
 		this.modelo = modelo;
 	}
-
+	
 	public String getMarca() {
 		return marca;
 	}
@@ -128,8 +90,5 @@ public class Vehiculo {
 	public void setFechaIngreso(Date fechaIngreso) {
 		FechaIngreso = fechaIngreso;
 	}
-	
-	
-
 
 }
