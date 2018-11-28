@@ -5,13 +5,11 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import co.com.ceiba.CeibaParqueadero.CeibaParqueaderoApplication;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
-@ContextConfiguration(classes={CeibaParqueaderoApplication.class})
+@SpringBootTest(classes = CeibaParqueaderoApplication.class)
 public class CeibaParqueaderoApplicationTests {
 
 	@Test
