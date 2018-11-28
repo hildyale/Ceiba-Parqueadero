@@ -3,21 +3,19 @@ package co.com.ceiba.CeibaParqueadero.Integracion;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.util.Optional;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import co.com.ceiba.CeibaParqueadero.CeibaParqueaderoApplication;
 import co.com.ceiba.CeibaParqueadero.Exception.ParqueaderoException;
 import co.com.ceiba.CeibaParqueadero.Modelo.Vehiculo;
 import co.com.ceiba.CeibaParqueadero.Repository.VehiculoRepository;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = CeibaParqueaderoApplication.class)
+@SpringBootTest
+@AutoConfigureTestDatabase
 public class vehiculoRepositoryTests {
 
 	@Autowired
