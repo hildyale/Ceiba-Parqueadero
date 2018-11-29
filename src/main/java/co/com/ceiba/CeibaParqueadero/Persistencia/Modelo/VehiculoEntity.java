@@ -17,7 +17,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @Table(name = "vehiculo")
 @EntityListeners(AuditingEntityListener.class)
-public class Vehiculo {
+public class VehiculoEntity {
 	
 	@Id
 	private String placa;
@@ -49,11 +49,11 @@ public class Vehiculo {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date FechaIngreso;
 	
-	public Vehiculo() {
+	public VehiculoEntity() {
 		
 	}
 
-	public Vehiculo(String placa, @NotBlank String tipo, int cilindraje, @NotBlank String color, @NotBlank String marca,
+	public VehiculoEntity(String placa, @NotBlank String tipo, int cilindraje, @NotBlank String color, @NotBlank String marca,
 			@NotBlank String clase) {
 		super();
 		this.placa = placa;

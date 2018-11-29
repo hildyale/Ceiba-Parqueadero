@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.com.ceiba.CeibaParqueadero.Dominio.Vigilante;
+import co.com.ceiba.CeibaParqueadero.Dominio.Modelo.Vehiculo;
 import co.com.ceiba.CeibaParqueadero.Exception.ParqueaderoException;
-import co.com.ceiba.CeibaParqueadero.Persistencia.Modelo.Vehiculo;
+import co.com.ceiba.CeibaParqueadero.Persistencia.Modelo.VehiculoEntity;
 import co.com.ceiba.CeibaParqueadero.Persistencia.Repository.VehiculoRepository;
 
 @RestController
@@ -24,13 +26,16 @@ public class VehiculoController {
 	
 	@Autowired
 	VehiculoRepository vehiculoRepository;
+	
+	@Autowired
+	Vigilante vigilante;
 
 	/**
 	 * Obtener todos los vehiculos
 	 * @return
 	 */
 	@GetMapping()
-	public List<Vehiculo> obtenerTodos(){
+	public List<VehiculoEntity> obtenerTodos(){
 		return vehiculoRepository.findAll();
 	}
 	
@@ -41,7 +46,7 @@ public class VehiculoController {
 	 */
 	@PostMapping()
 	public Vehiculo crearVehiculo(@Valid @RequestBody Vehiculo vehiculo){
-		return vehiculoRepository.save(vehiculo);
+		return vigilante.crearVehiculo(vehiculo);
 	}
 	
 	/**
@@ -51,7 +56,7 @@ public class VehiculoController {
 	 * @throws ParqueaderoException
 	 */
 	@GetMapping("/{placa}")
-	public Vehiculo obtenerVehiculoPorPlaca(@PathVariable(value="placa") String placa) throws ParqueaderoException {
+	public VehiculoEntity obtenerVehiculoPorPlaca(@PathVariable(value="placa") String placa) throws ParqueaderoException {
 		return vehiculoRepository.findById(placa)
 				.orElseThrow(()-> new ParqueaderoException("resource no found"));
 	}
@@ -64,7 +69,7 @@ public class VehiculoController {
 	 */
 	@DeleteMapping("/{placa}")
 	public ResponseEntity<String> eliminarVehiculo(@PathVariable(value="placa") String placa) throws ParqueaderoException{
-		Vehiculo vehiculo = vehiculoRepository.findById(placa)
+		VehiculoEntity vehiculo = vehiculoRepository.findById(placa)
 				.orElseThrow(()-> new ParqueaderoException("resource no found"));
 		
 		vehiculoRepository.delete(vehiculo);

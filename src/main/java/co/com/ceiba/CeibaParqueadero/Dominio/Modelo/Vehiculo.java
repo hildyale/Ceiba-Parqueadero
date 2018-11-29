@@ -26,6 +26,17 @@ public class Vehiculo {
 		this.marca = marca;
 		this.clase = clase;
 	}
+	
+	public Vehiculo(String placa, String tipo, int cilindraje, String color, String modelo ,String marca, String clase) {
+		super();
+		this.placa = placa;
+		this.tipo = tipo;
+		this.cilindraje = cilindraje;
+		this.color = color;
+		this.marca = marca;
+		this.clase = clase;
+		this.modelo = modelo;
+	}
 
 	public String getPlaca() {
 		return placa;
