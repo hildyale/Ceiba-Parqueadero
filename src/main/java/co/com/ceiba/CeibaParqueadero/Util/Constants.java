@@ -19,7 +19,7 @@ public abstract class Constants {
     public static final String ERROR_VEHICULO_NO_EXISTE = "Ese vehiculo no existe";
     
     public static final String STATUS_OK = "OK";
-    public static final String STATUS_BAD_REQUEST = "OK";
+    public static final String STATUS_BAD_REQUEST = "BAD REQUEST";
     public static final String VEHICULO_CREADO = "Vehiculo creado correctamente";
     public static final String VEHICULO_ELIMINADO = "Vehiculo eliminado correctamente";
 }

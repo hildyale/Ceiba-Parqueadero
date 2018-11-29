@@ -70,6 +70,12 @@ public class VehiculoRepositoryImp implements VehiculoRepository {
 	public Long obtenerCantidadVehiculos() {
 		return vehiculoEntityRepository.count();
 	}
+
+
+	@Override
+	public Long obtenerCantidadPorTipo(String tipo) {
+		return vehiculoEntityRepository.countByTipo(tipo);
+	}
 	
 	
 

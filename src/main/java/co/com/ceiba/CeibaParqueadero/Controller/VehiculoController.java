@@ -3,6 +3,7 @@ package co.com.ceiba.CeibaParqueadero.Controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +30,8 @@ public class VehiculoController {
 		try {
 			return vehiculoRepository.obtenerTodosLosVehiculos();
 		} catch (Exception e) {
-			return ResponseEntity.ok(new Respuesta("BAD REQUEST",e.getMessage()));
+			Respuesta respuesta = new Respuesta(Constants.STATUS_BAD_REQUEST,e.getMessage());
+			return new ResponseEntity<Respuesta>(respuesta,HttpStatus.BAD_REQUEST);
 		}
 		
 	}
@@ -39,9 +41,11 @@ public class VehiculoController {
 	public ResponseEntity<Respuesta> crearVehiculo(@Valid @RequestBody Vehiculo vehiculo){
 		try {
 			vehiculoRepository.crearVehiculo(vehiculo);
-			return ResponseEntity.ok(new Respuesta(Constants.STATUS_OK,Constants.VEHICULO_CREADO));
+			Respuesta respuesta = new Respuesta(Constants.STATUS_OK,Constants.VEHICULO_CREADO);
+			return new ResponseEntity<Respuesta>(respuesta,HttpStatus.OK);
 		}catch(Exception e) {
-			return ResponseEntity.ok(new Respuesta(Constants.STATUS_BAD_REQUEST,e.getMessage()));
+			Respuesta respuesta = new Respuesta(Constants.STATUS_BAD_REQUEST,e.getMessage());
+			return new ResponseEntity<Respuesta>(respuesta,HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -49,9 +53,10 @@ public class VehiculoController {
 	@GetMapping("/{placa}")
 	public Object obtenerVehiculoPorPlaca(@PathVariable(value="placa") String placa) throws ParqueaderoException {
 		try {
-			return vehiculoRepository.obtenerVehiculoPorPlaca(placa);
+			return new ResponseEntity<Vehiculo>(vehiculoRepository.obtenerVehiculoPorPlaca(placa),HttpStatus.OK);
 		}catch(Exception e) {
-			return ResponseEntity.ok(new Respuesta("BAD REQUEST",e.getMessage()));
+			return new ResponseEntity<Respuesta>(new Respuesta("BAD REQUEST",e.getMessage()),HttpStatus.BAD_REQUEST);
+			
 		}
 	}
 	
@@ -60,9 +65,11 @@ public class VehiculoController {
 	public ResponseEntity<Respuesta> eliminarVehiculo(@PathVariable(value="placa") String placa) throws ParqueaderoException{
 		try {
 			vehiculoRepository.eliminarVehiculo(placa);
-			return ResponseEntity.ok(new Respuesta(Constants.STATUS_OK,Constants.VEHICULO_ELIMINADO));
+			Respuesta respuesta = new Respuesta(Constants.STATUS_OK,Constants.VEHICULO_ELIMINADO);
+			return new ResponseEntity<Respuesta>(respuesta,HttpStatus.OK);
 		}catch(Exception e) {
-			return ResponseEntity.ok(new Respuesta(Constants.STATUS_BAD_REQUEST,e.getMessage()));
+			Respuesta respuesta = new Respuesta(Constants.STATUS_BAD_REQUEST,e.getMessage());
+			return new ResponseEntity<Respuesta>(respuesta,HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -70,9 +77,11 @@ public class VehiculoController {
 	@GetMapping("/cantidad")
 	public ResponseEntity<Respuesta> obetenerCantidadVehiculos(){
 		try {
-			return ResponseEntity.ok(new Respuesta(Constants.STATUS_OK,vehiculoRepository.obtenerCantidadVehiculos().toString()));
+			Respuesta respuesta = new Respuesta(Constants.STATUS_OK,vehiculoRepository.obtenerCantidadVehiculos().toString());
+			return new ResponseEntity<Respuesta>(respuesta,HttpStatus.OK);
 		}catch(Exception e) {
-			return ResponseEntity.ok(new Respuesta(Constants.STATUS_BAD_REQUEST,e.getMessage()));
+			Respuesta respuesta = new Respuesta(Constants.STATUS_BAD_REQUEST,e.getMessage());
+			return new ResponseEntity<Respuesta>(respuesta,HttpStatus.BAD_REQUEST);
 		}
 	}
 	

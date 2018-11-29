@@ -8,5 +8,6 @@ import co.com.ceiba.CeibaParqueadero.Persistencia.Modelo.VehiculoEntity;
 @Repository
 public interface VehiculoEntityRepository extends JpaRepository<VehiculoEntity, String> {
 
+	Long countByTipo(String tipo);
 	
 }
