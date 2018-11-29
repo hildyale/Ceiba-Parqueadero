@@ -128,6 +128,13 @@ public class VehiculoEntity {
 	public void setFechaIngreso(Date fechaIngreso) {
 		FechaIngreso = fechaIngreso;
 	}
+
+	@Override
+	public String toString() {
+		return "VehiculoEntity [placa=" + placa + ", tipo=" + tipo + ", cilindraje=" + cilindraje + ", color=" + color
+				+ ", modelo=" + modelo + ", marca=" + marca + ", clase=" + clase + ", FechaIngreso=" + FechaIngreso
+				+ "]";
+	}
 	
 	
 

@@ -11,7 +11,7 @@ public class Vehiculo {
 	private String modelo;
 	private String marca;
 	private String clase;
-	private Date FechaIngreso;
+	private Date fechaIngreso;
 	
 	public Vehiculo() {
 			
@@ -95,11 +95,13 @@ public class Vehiculo {
 	}
 
 	public Date getFechaIngreso() {
-		return FechaIngreso;
+		return fechaIngreso;
 	}
 
 	public void setFechaIngreso(Date fechaIngreso) {
-		FechaIngreso = fechaIngreso;
+		this.fechaIngreso = fechaIngreso;
 	}
+	
+	
 
 }

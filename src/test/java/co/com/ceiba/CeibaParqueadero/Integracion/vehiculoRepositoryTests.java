@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import co.com.ceiba.CeibaParqueadero.Exception.ParqueaderoException;
 import co.com.ceiba.CeibaParqueadero.Persistencia.Modelo.VehiculoEntity;
-import co.com.ceiba.CeibaParqueadero.Persistencia.Repository.VehiculoRepository;
+import co.com.ceiba.CeibaParqueadero.Persistencia.Repository.VehiculoEntityRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -19,7 +19,7 @@ import co.com.ceiba.CeibaParqueadero.Persistencia.Repository.VehiculoRepository;
 public class vehiculoRepositoryTests {
 
 	@Autowired
-    private VehiculoRepository vehiculoRepository;
+    private VehiculoEntityRepository vehiculoRepository;
  
     @Test
     public void guardarYObtenerVehiculo() throws ParqueaderoException {

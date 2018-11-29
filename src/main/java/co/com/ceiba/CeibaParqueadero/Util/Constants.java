@@ -14,4 +14,12 @@ public abstract class Constants {
     public static final double RECARGO_MOTO = 2000;
     public static final int RESTRICCION_CILINDRAJE_MOTO = 500;
     public static final int LIMITE_HORAS_PARA_DIA = 9;
+    
+    public static final String ERROR_VEHICULO_YA_EXISTE = "Ya existe un vehiculo con esa placa";
+    public static final String ERROR_VEHICULO_NO_EXISTE = "Ese vehiculo no existe";
+    
+    public static final String STATUS_OK = "OK";
+    public static final String STATUS_BAD_REQUEST = "OK";
+    public static final String VEHICULO_CREADO = "Vehiculo creado correctamente";
+    public static final String VEHICULO_ELIMINADO = "Vehiculo eliminado correctamente";
 }

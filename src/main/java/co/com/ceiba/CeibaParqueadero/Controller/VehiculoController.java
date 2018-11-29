@@ -1,7 +1,5 @@
 package co.com.ceiba.CeibaParqueadero.Controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.com.ceiba.CeibaParqueadero.Dominio.Vigilante;
+import co.com.ceiba.CeibaParqueadero.Dominio.VehiculoRepository;
 import co.com.ceiba.CeibaParqueadero.Dominio.Modelo.Vehiculo;
 import co.com.ceiba.CeibaParqueadero.Exception.ParqueaderoException;
-import co.com.ceiba.CeibaParqueadero.Persistencia.Modelo.VehiculoEntity;
-import co.com.ceiba.CeibaParqueadero.Persistencia.Repository.VehiculoRepository;
+import co.com.ceiba.CeibaParqueadero.Util.Constants;
 
 @RestController
 @RequestMapping("/vehiculos")
@@ -26,63 +23,57 @@ public class VehiculoController {
 	
 	@Autowired
 	VehiculoRepository vehiculoRepository;
-	
-	@Autowired
-	Vigilante vigilante;
 
-	/**
-	 * Obtener todos los vehiculos
-	 * @return
-	 */
 	@GetMapping()
-	public List<VehiculoEntity> obtenerTodos(){
-		return vehiculoRepository.findAll();
-	}
-	
-	/**
-	 * Registrar un nuevo vehiculo
-	 * @param vehiculo
-	 * @return
-	 */
-	@PostMapping()
-	public Vehiculo crearVehiculo(@Valid @RequestBody Vehiculo vehiculo){
-		return vigilante.crearVehiculo(vehiculo);
-	}
-	
-	/**
-	 * Obtener vehiculo dada su placa
-	 * @param placa
-	 * @return
-	 * @throws ParqueaderoException
-	 */
-	@GetMapping("/{placa}")
-	public VehiculoEntity obtenerVehiculoPorPlaca(@PathVariable(value="placa") String placa) throws ParqueaderoException {
-		return vehiculoRepository.findById(placa)
-				.orElseThrow(()-> new ParqueaderoException("resource no found"));
-	}
-	
-	/**
-	 * Eliminar vehiculo dada su placa
-	 * @param placa
-	 * @return
-	 * @throws ParqueaderoException
-	 */
-	@DeleteMapping("/{placa}")
-	public ResponseEntity<String> eliminarVehiculo(@PathVariable(value="placa") String placa) throws ParqueaderoException{
-		VehiculoEntity vehiculo = vehiculoRepository.findById(placa)
-				.orElseThrow(()-> new ParqueaderoException("resource no found"));
+	public Object obtenerTodos(){
+		try {
+			return vehiculoRepository.obtenerTodosLosVehiculos();
+		} catch (Exception e) {
+			return ResponseEntity.ok(new Respuesta("BAD REQUEST",e.getMessage()));
+		}
 		
-		vehiculoRepository.delete(vehiculo);
-		return ResponseEntity.ok("hola");
 	}
 	
-	/**
-	 * Obtener la cantidad de vehiculos
-	 * @return
-	 */
+	
+	@PostMapping()
+	public ResponseEntity<Respuesta> crearVehiculo(@Valid @RequestBody Vehiculo vehiculo){
+		try {
+			vehiculoRepository.crearVehiculo(vehiculo);
+			return ResponseEntity.ok(new Respuesta(Constants.STATUS_OK,Constants.VEHICULO_CREADO));
+		}catch(Exception e) {
+			return ResponseEntity.ok(new Respuesta(Constants.STATUS_BAD_REQUEST,e.getMessage()));
+		}
+	}
+	
+	
+	@GetMapping("/{placa}")
+	public Object obtenerVehiculoPorPlaca(@PathVariable(value="placa") String placa) throws ParqueaderoException {
+		try {
+			return vehiculoRepository.obtenerVehiculoPorPlaca(placa);
+		}catch(Exception e) {
+			return ResponseEntity.ok(new Respuesta("BAD REQUEST",e.getMessage()));
+		}
+	}
+	
+	
+	@DeleteMapping("/{placa}")
+	public ResponseEntity<Respuesta> eliminarVehiculo(@PathVariable(value="placa") String placa) throws ParqueaderoException{
+		try {
+			vehiculoRepository.eliminarVehiculo(placa);
+			return ResponseEntity.ok(new Respuesta(Constants.STATUS_OK,Constants.VEHICULO_ELIMINADO));
+		}catch(Exception e) {
+			return ResponseEntity.ok(new Respuesta(Constants.STATUS_BAD_REQUEST,e.getMessage()));
+		}
+	}
+	
+	
 	@GetMapping("/cantidad")
-	public Long obetenerCantidadVehiculos(){
-		return vehiculoRepository.count();
+	public ResponseEntity<Respuesta> obetenerCantidadVehiculos(){
+		try {
+			return ResponseEntity.ok(new Respuesta(Constants.STATUS_OK,vehiculoRepository.obtenerCantidadVehiculos().toString()));
+		}catch(Exception e) {
+			return ResponseEntity.ok(new Respuesta(Constants.STATUS_BAD_REQUEST,e.getMessage()));
+		}
 	}
 	
 

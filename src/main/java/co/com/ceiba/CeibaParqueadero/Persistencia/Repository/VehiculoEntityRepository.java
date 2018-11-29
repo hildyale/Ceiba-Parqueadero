@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import co.com.ceiba.CeibaParqueadero.Persistencia.Modelo.VehiculoEntity;
 
 @Repository
-public interface VehiculoRepository extends JpaRepository<VehiculoEntity, String> {
+public interface VehiculoEntityRepository extends JpaRepository<VehiculoEntity, String> {
 
 	
 }

@@ -36,7 +36,6 @@ public class VehiculoBuilder {
 		vehiculoEntity.setModelo(vehiculo.getModelo());
 		vehiculoEntity.setMarca(vehiculo.getMarca());
 		vehiculoEntity.setClase(vehiculo.getClase());
-		
 		return vehiculoEntity;
 	}
 
