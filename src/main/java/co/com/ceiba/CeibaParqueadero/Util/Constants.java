@@ -4,9 +4,6 @@ public abstract class Constants {
 
 	public static final int MAX_CARROS = 20;
     public static final int MAX_MOTOS = 10;
-    public static final String RESTRICCION_PRIMERA_LETRA = "A";
-    public static final String RESTRICCION_DIA_UNO = "Domingo";
-    public static final String RESTRICCION_DIA_DOS = "Lunes";
     public static final double VALOR_HORA_CARRO = 1000;
     public static final double VALOR_HORA_MOTO = 500;
     public static final double VALOR_DIA_CARRO = 8000;
@@ -22,4 +19,9 @@ public abstract class Constants {
     public static final String STATUS_BAD_REQUEST = "BAD REQUEST";
     public static final String VEHICULO_CREADO = "Vehiculo creado correctamente";
     public static final String VEHICULO_ELIMINADO = "Vehiculo eliminado correctamente";
+    public static final String RESTRICCION_PRIMERA_LETRA = "A";
+    public static final String RESTRICCION_DIA_UNO = "Domingo";
+    public static final String RESTRICCION_DIA_DOS = "Lunes";
+    public static final String RESTRICCION = "No esta Autorizado a Ingresar";
+    
 }

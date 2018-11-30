@@ -14,16 +14,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.com.ceiba.CeibaParqueadero.Dominio.VehiculoRepository;
+import co.com.ceiba.CeibaParqueadero.Dominio.Vigilante;
 import co.com.ceiba.CeibaParqueadero.Dominio.Modelo.Vehiculo;
 import co.com.ceiba.CeibaParqueadero.Exception.ParqueaderoException;
 import co.com.ceiba.CeibaParqueadero.Util.Constants;
 
 @RestController
 @RequestMapping("/vehiculos")
-public class VehiculoController {
+public class VigilanteController {
 	
 	@Autowired
 	VehiculoRepository vehiculoRepository;
+	
+	@Autowired
+	Vigilante vigilante;
 
 	@GetMapping()
 	public Object obtenerTodos(){
@@ -38,12 +42,13 @@ public class VehiculoController {
 	
 	
 	@PostMapping()
-	public ResponseEntity<Respuesta> crearVehiculo(@Valid @RequestBody Vehiculo vehiculo){
+	public ResponseEntity<Respuesta> registrarVehiculo(@Valid @RequestBody Vehiculo vehiculo){
 		try {
-			vehiculoRepository.crearVehiculo(vehiculo);
+			vigilante.registrarVehiculo(vehiculo);
 			Respuesta respuesta = new Respuesta(Constants.STATUS_OK,Constants.VEHICULO_CREADO);
 			return new ResponseEntity<Respuesta>(respuesta,HttpStatus.OK);
-		}catch(Exception e) {
+		}catch(ParqueaderoException e) {
+			e.printStackTrace();
 			Respuesta respuesta = new Respuesta(Constants.STATUS_BAD_REQUEST,e.getMessage());
 			return new ResponseEntity<Respuesta>(respuesta,HttpStatus.BAD_REQUEST);
 		}

@@ -102,6 +102,4 @@ public class Vehiculo {
 		this.fechaIngreso = fechaIngreso;
 	}
 	
-	
-
 }
