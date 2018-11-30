@@ -18,7 +18,8 @@ public class VehiculoBuilder {
 									vehiculoEntity.getColor(),
 									vehiculoEntity.getModelo(),
 									vehiculoEntity.getMarca(),
-									vehiculoEntity.getClase()							
+									vehiculoEntity.getClase(),
+									vehiculoEntity.getFechaIngreso()
 									);
 		}
 		

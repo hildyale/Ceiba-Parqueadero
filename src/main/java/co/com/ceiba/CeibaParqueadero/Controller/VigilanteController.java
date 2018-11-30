@@ -24,15 +24,12 @@ import co.com.ceiba.CeibaParqueadero.Util.Constants;
 public class VigilanteController {
 	
 	@Autowired
-	VehiculoRepository vehiculoRepository;
-	
-	@Autowired
 	Vigilante vigilante;
 
 	@GetMapping()
-	public Object obtenerTodos(){
+	public Object consultaVehiculos(){
 		try {
-			return vehiculoRepository.obtenerTodosLosVehiculos();
+			return vigilante.obtenerTodosLosVehiculos();
 		} catch (Exception e) {
 			Respuesta respuesta = new Respuesta(Constants.STATUS_BAD_REQUEST,e.getMessage());
 			return new ResponseEntity<Respuesta>(respuesta,HttpStatus.BAD_REQUEST);
@@ -54,41 +51,19 @@ public class VigilanteController {
 		}
 	}
 	
-	
-	@GetMapping("/{placa}")
-	public Object obtenerVehiculoPorPlaca(@PathVariable(value="placa") String placa) throws ParqueaderoException {
-		try {
-			return new ResponseEntity<Vehiculo>(vehiculoRepository.obtenerVehiculoPorPlaca(placa),HttpStatus.OK);
-		}catch(Exception e) {
-			return new ResponseEntity<Respuesta>(new Respuesta("BAD REQUEST",e.getMessage()),HttpStatus.BAD_REQUEST);
-			
-		}
-	}
-	
-	
+
 	@DeleteMapping("/{placa}")
-	public ResponseEntity<Respuesta> eliminarVehiculo(@PathVariable(value="placa") String placa) throws ParqueaderoException{
+	public ResponseEntity<Respuesta> salidaVehiculo(@PathVariable(value="placa") String placa) throws ParqueaderoException{
 		try {
-			vehiculoRepository.eliminarVehiculo(placa);
-			Respuesta respuesta = new Respuesta(Constants.STATUS_OK,Constants.VEHICULO_ELIMINADO);
+			Respuesta respuesta = new Respuesta(Constants.STATUS_OK,String.valueOf(vigilante.salidaVehiculo(placa)));
 			return new ResponseEntity<Respuesta>(respuesta,HttpStatus.OK);
 		}catch(Exception e) {
+			e.printStackTrace();
 			Respuesta respuesta = new Respuesta(Constants.STATUS_BAD_REQUEST,e.getMessage());
 			return new ResponseEntity<Respuesta>(respuesta,HttpStatus.BAD_REQUEST);
 		}
 	}
 	
-	
-	@GetMapping("/cantidad")
-	public ResponseEntity<Respuesta> obetenerCantidadVehiculos(){
-		try {
-			Respuesta respuesta = new Respuesta(Constants.STATUS_OK,vehiculoRepository.obtenerCantidadVehiculos().toString());
-			return new ResponseEntity<Respuesta>(respuesta,HttpStatus.OK);
-		}catch(Exception e) {
-			Respuesta respuesta = new Respuesta(Constants.STATUS_BAD_REQUEST,e.getMessage());
-			return new ResponseEntity<Respuesta>(respuesta,HttpStatus.BAD_REQUEST);
-		}
-	}
 	
 
 }

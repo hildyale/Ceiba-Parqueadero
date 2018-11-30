@@ -31,21 +31,21 @@ public class VigilanteImp implements Vigilante {
 	}
 
 	@Override
-	public Long salidaVehiculo(String placa) {
-		
-		return null;
+	public double salidaVehiculo(String placa) throws ParqueaderoException {
+		System.out.println("------------------------------vigilante-----------------------------");
+		Vehiculo vehiculo = vehiculoRepository.obtenerVehiculoPorPlaca(placa);
+		VehiculoValidador vehiculoValidador = vehiculoFactory.getVehiculo(vehiculo.getTipo());
+		double valor = vehiculoValidador.calcularValor(vehiculo);
+		//vehiculoRepository.eliminarVehiculo(placa);
+		System.out.println("--------------------------------Valor en vigilante-----------------------------");
+		System.out.println(valor);
+		return valor;
 	}
 
-	@Override
-	public Vehiculo obtenerVehiculoPorPlaca(String placa) throws ParqueaderoException {
-		
-		return null;
-	}
 
 	@Override
 	public List<Vehiculo> obtenerTodosLosVehiculos() {
-		
-		return null;
+		return vehiculoRepository.obtenerTodosLosVehiculos();
 	}
 
 }
