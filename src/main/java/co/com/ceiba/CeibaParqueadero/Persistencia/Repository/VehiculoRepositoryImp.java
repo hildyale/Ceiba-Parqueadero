@@ -13,7 +13,6 @@ import co.com.ceiba.CeibaParqueadero.Exception.ParqueaderoException;
 import co.com.ceiba.CeibaParqueadero.Persistencia.Builder.VehiculoBuilder;
 import co.com.ceiba.CeibaParqueadero.Persistencia.Modelo.VehiculoEntity;
 import co.com.ceiba.CeibaParqueadero.Util.Constants;
-import javassist.bytecode.Descriptor.Iterator;
 
 @Service
 public class VehiculoRepositoryImp implements VehiculoRepository {

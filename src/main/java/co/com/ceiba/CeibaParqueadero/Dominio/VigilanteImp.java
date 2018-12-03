@@ -37,7 +37,7 @@ public class VigilanteImp implements Vigilante {
 		Vehiculo vehiculo = vehiculoRepository.obtenerVehiculoPorPlaca(placa);
 		VehiculoValidador vehiculoValidador = vehiculoFactory.getVehiculo(vehiculo.getTipo());
 		double valor = vehiculoValidador.calcularValor(vehiculo);
-		//vehiculoRepository.eliminarVehiculo(placa);
+		vehiculoRepository.eliminarVehiculo(placa);
 		System.out.println("--------------------------------Valor en vigilante-----------------------------");
 		System.out.println(valor);
 		return valor;
