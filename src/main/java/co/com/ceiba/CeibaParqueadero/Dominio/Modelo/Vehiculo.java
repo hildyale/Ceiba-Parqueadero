@@ -112,5 +112,14 @@ public class Vehiculo {
 	public void setFechaIngreso(Date fechaIngreso) {
 		this.fechaIngreso = fechaIngreso;
 	}
+
+	@Override
+	public String toString() {
+		return "Vehiculo [placa=" + placa + ", tipo=" + tipo + ", cilindraje=" + cilindraje + ", color=" + color
+				+ ", modelo=" + modelo + ", marca=" + marca + ", clase=" + clase + ", fechaIngreso=" + fechaIngreso
+				+ "]";
+	}
+	
+	
 	
 }

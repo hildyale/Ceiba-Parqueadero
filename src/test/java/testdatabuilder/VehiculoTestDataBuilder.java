@@ -43,7 +43,7 @@ public class VehiculoTestDataBuilder {
 		return this;	
 	}
 	
-	public VehiculoTestDataBuilder conTipo(String placa){
+	public VehiculoTestDataBuilder conTipo(String tipo){
 		this.tipo = tipo;
 		return this;	
 	}

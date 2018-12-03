@@ -1,14 +1,10 @@
 package co.com.ceiba.CeibaParqueadero.Dominio.Validaciones;
 
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.stereotype.Component;
+
 import co.com.ceiba.CeibaParqueadero.Dominio.VehiculoRepository;
 import co.com.ceiba.CeibaParqueadero.Dominio.Modelo.Vehiculo;
 import co.com.ceiba.CeibaParqueadero.Exception.ParqueaderoException;
@@ -22,6 +18,7 @@ public class MotoValidador extends VehiculoValidador {
 	
 	public static final String TIPO = "moto";
 	public static final String ERROR_DISPONIBILIDAD = "No hay disponibilidad para motos";
+	Logger logger = LoggerFactory.getLogger(MotoValidador.class);
 	
 	public MotoValidador() {
 	}
@@ -39,9 +36,9 @@ public class MotoValidador extends VehiculoValidador {
 		if(vehiculo.getCilindraje()>Constants.RESTRICCION_CILINDRAJE_MOTO) {
 			valor = valor + 2000;
 		}
-		System.out.println("----------------------Antes de la fecha---------------------------");
-		System.out.println(vehiculo.getFechaIngreso());
-		System.out.println(obtenerFecha());
+		logger.debug("----------------------Antes de la fecha---------------------------);");
+		logger.debug(vehiculo.getFechaIngreso().toString());
+		logger.debug(obtenerFecha().toString());
 		int horas = obtenerHorasTrascurridas(vehiculo.getFechaIngreso(), obtenerFecha());
 		if(horas<9) {
 			return valor + (Constants.VALOR_HORA_MOTO*horas);
@@ -55,9 +52,11 @@ public class MotoValidador extends VehiculoValidador {
 			}else {
 				valor = valor + Constants.VALOR_DIA_MOTO;
 			}
-			System.out.println("--------------------------------Valor en moto-----------------------------");
-			System.out.println(valor + dias*Constants.VALOR_DIA_MOTO);
-			return valor + dias*Constants.VALOR_DIA_MOTO;
+			logger.debug("--------------------------------Valor en moto-----------------------------");
+			valor = valor + (dias*Constants.VALOR_DIA_MOTO);
+			String log = String.valueOf(valor);
+			logger.debug(log);
+			return valor;
 		}
 	}
 

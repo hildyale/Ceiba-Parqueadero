@@ -185,7 +185,8 @@ public class vehiculoRepositoryTests {
 		long cant = 0;
     	
         //Act
-	    vehiculoRepository.obtenerCantidadPorTipo(Constants.TIPO_CARRO);
+		vehiculoRepository.crearVehiculo(vehiculo);
+	    cant = vehiculoRepository.obtenerCantidadPorTipo(Constants.TIPO_CARRO);
     		
 		//Assert
 			assertEquals(1, cant);
@@ -199,10 +200,12 @@ public class vehiculoRepositoryTests {
 		long cant = 0;
     	
         //Act
-	    vehiculoRepository.obtenerCantidadPorTipo(Constants.TIPO_MOTO);
-    		
+		vehiculoRepository.crearVehiculo(vehiculo);
+	    cant = vehiculoRepository.obtenerCantidadPorTipo(Constants.TIPO_MOTO);
+    	System.out.println(cant);
+    	System.out.println(vehiculo.toString());
 		//Assert
-			assertEquals(1, cant);
+		assertEquals(1, cant);
     }
 
 }
