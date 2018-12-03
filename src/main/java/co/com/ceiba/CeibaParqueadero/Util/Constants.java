@@ -19,11 +19,13 @@ public abstract class Constants {
     public static final String STATUS_BAD_REQUEST = "BAD REQUEST";
     public static final String VEHICULO_CREADO = "Vehiculo creado correctamente";
     public static final String VEHICULO_ELIMINADO = "Vehiculo eliminado correctamente";
-    public static final String RESTRICCION_PRIMERA_LETRA = "A";
+    public static final String RESTRICCION_PRIMERA_LETRA = "a";
     public static final String RESTRICCION_DIA_UNO = "Domingo";
     public static final String RESTRICCION_DIA_DOS = "Lunes";
     public static final String RESTRICCION = "No esta Autorizado a Ingresar";
     public static final String TIPO_CARRO = "carro";
     public static final String TIPO_MOTO = "moto";
+    public static final int MIN_HORAS_DIA = 9;
+    public static final int MAX_HORAS_DIA = 24;
     
 }

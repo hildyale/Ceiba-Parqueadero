@@ -24,7 +24,8 @@ import testdatabuilder.VehiculoTestDataBuilder;
 public class vigilanteTest {
 
 	public static final String PLACA = "abc987";
-	public static final String ERROR_DISPONIBILIDAD = "No hay disponibilidad para carros";
+	public static final String ERROR_DISPONIBILIDAD_CARROS = "No hay disponibilidad para carros";
+	public static final String ERROR_DISPONIBILIDAD_MOTOS = "No hay disponibilidad para motos";
 	
 	@Autowired
 	Vigilante vigilante;
@@ -50,8 +51,9 @@ public class vigilanteTest {
 		assertTrue(existe);
 	}
 	
+	
 	@Test 
-	public void registrarVehiculoNoDisponibilidadTest() throws ParqueaderoException {
+	public void registrarCarroNoDisponibilidadTest() throws ParqueaderoException {
 		//arrange
 		Vehiculo vehiculo = new VehiculoTestDataBuilder().build();
 		
@@ -64,7 +66,27 @@ public class vigilanteTest {
 			fail();
 		//assert
 		}catch (ParqueaderoException e) {
-			assertEquals(ERROR_DISPONIBILIDAD, e.getMessage());
+			assertEquals(ERROR_DISPONIBILIDAD_CARROS, e.getMessage());
+		}
+		
+		
+	}
+	
+	@Test 
+	public void registrarMotoNoDisponibilidadTest() throws ParqueaderoException {
+		//arrange
+		Vehiculo vehiculo = new VehiculoTestDataBuilder().conTipo(Constants.TIPO_MOTO).build();
+		
+		//act
+		try {
+			for(int i = 0;i<Constants.MAX_MOTOS+1;i++) {
+				vehiculo.setPlaca(PLACA+i);
+				vigilante.registrarVehiculo(vehiculo);
+			}
+			fail();
+		//assert
+		}catch (ParqueaderoException e) {
+			assertEquals(ERROR_DISPONIBILIDAD_MOTOS, e.getMessage());
 		}
 		
 		

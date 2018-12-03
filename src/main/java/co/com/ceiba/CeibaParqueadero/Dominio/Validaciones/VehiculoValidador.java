@@ -19,6 +19,7 @@ public abstract class VehiculoValidador {
 	
 	public void validarPlaca(String placa) throws ParqueaderoException {
 		String primeraLetra = String.valueOf(placa.charAt(0));
+		primeraLetra = primeraLetra.toLowerCase();
 		if(validarLetra(primeraLetra)) {
 			if(obtenerDiaDeLaSemana() != Calendar.MONDAY && obtenerDiaDeLaSemana() != Calendar.SUNDAY) {
 				throw new ParqueaderoException(Constants.RESTRICCION);

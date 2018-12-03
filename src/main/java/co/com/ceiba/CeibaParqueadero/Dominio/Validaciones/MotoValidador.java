@@ -18,7 +18,7 @@ public class MotoValidador extends VehiculoValidador {
 	
 	public static final String TIPO = "moto";
 	public static final String ERROR_DISPONIBILIDAD = "No hay disponibilidad para motos";
-	Logger logger = LoggerFactory.getLogger(MotoValidador.class);
+	private static final Logger logger = LoggerFactory.getLogger(MotoValidador.class);
 	
 	public MotoValidador() {
 	}
@@ -36,18 +36,20 @@ public class MotoValidador extends VehiculoValidador {
 		if(vehiculo.getCilindraje()>Constants.RESTRICCION_CILINDRAJE_MOTO) {
 			valor = valor + 2000;
 		}
+		
 		logger.debug("----------------------Antes de la fecha---------------------------);");
 		logger.debug(vehiculo.getFechaIngreso().toString());
 		logger.debug(obtenerFecha().toString());
+		
 		int horas = obtenerHorasTrascurridas(vehiculo.getFechaIngreso(), obtenerFecha());
-		if(horas<9) {
+		if(horas<Constants.MIN_HORAS_DIA) {
 			return valor + (Constants.VALOR_HORA_MOTO*horas);
-		}else if(horas < 24) {
+		}else if(horas < Constants.MAX_HORAS_DIA) {
 			return valor + Constants.VALOR_DIA_MOTO;
 		}else {
-			int dias = (int) Math.floor(horas / 24);
-			horas = horas % 24;
-			if(horas<9) {
+			int dias = (horas / Constants.MAX_HORAS_DIA);
+			horas = horas % Constants.MAX_HORAS_DIA;
+			if(horas<Constants.MIN_HORAS_DIA) {
 				valor = valor + (horas*Constants.VALOR_HORA_MOTO);
 			}else {
 				valor = valor + Constants.VALOR_DIA_MOTO;
