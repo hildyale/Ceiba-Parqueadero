@@ -3,8 +3,9 @@ package co.com.ceiba.CeibaParqueadero.Dominio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import co.com.ceiba.CeibaParqueadero.Dominio.Modelo.Carro;
-import co.com.ceiba.CeibaParqueadero.Dominio.Modelo.Moto;
+import co.com.ceiba.CeibaParqueadero.Dominio.Validaciones.CarroValidador;
+import co.com.ceiba.CeibaParqueadero.Dominio.Validaciones.MotoValidador;
+import co.com.ceiba.CeibaParqueadero.Dominio.Validaciones.VehiculoValidador;
 import co.com.ceiba.CeibaParqueadero.Exception.ParqueaderoException;
 
 
@@ -13,10 +14,10 @@ public class VehiculoFactory {
 
 	private static final String SOLO_CARROS_Y_MOTOS = "Solo se permiten carros o motos";
 	@Autowired
-	Carro carro;
+	CarroValidador carro;
 	
 	@Autowired
-	Moto moto;
+	MotoValidador moto;
 	
 	public VehiculoFactory() {
 	}

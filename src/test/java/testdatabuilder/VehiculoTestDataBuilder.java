@@ -2,6 +2,8 @@ package testdatabuilder;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 
+import java.util.Date;
+
 import co.com.ceiba.CeibaParqueadero.Dominio.Modelo.Vehiculo;
 
 public class VehiculoTestDataBuilder {
@@ -12,6 +14,8 @@ public class VehiculoTestDataBuilder {
 	private static final String COLOR  = "blanco";
 	private static final String MARCA  = "renault";
 	private static final String CLASE  = "logan";
+	private static final String MODELO  = "2018";
+	private static final Date FECHA_INGRESO  = new Date();
 	
 	private String placa; 
 	private String tipo;
@@ -19,6 +23,8 @@ public class VehiculoTestDataBuilder {
 	private String color;
 	private String marca;
 	private String clase;
+	private Date fechaIngreso;
+	private String modelo;
 	
 	
 	public VehiculoTestDataBuilder() {
@@ -28,6 +34,8 @@ public class VehiculoTestDataBuilder {
 		this.color = COLOR;
 		this.marca = MARCA;
 		this.clase = CLASE;
+		this.fechaIngreso = FECHA_INGRESO;
+		this.modelo = MODELO;
 	}
 	
 	public VehiculoTestDataBuilder conPlaca(String placa){
@@ -60,8 +68,18 @@ public class VehiculoTestDataBuilder {
 		return this;	
 	}
 	
+	public VehiculoTestDataBuilder conModelo(String modelo){
+		this.modelo = modelo;
+		return this;	
+	}
+	
+	public VehiculoTestDataBuilder conFecha(Date fechaIngreso){
+		this.fechaIngreso = fechaIngreso;
+		return this;	
+	}
+	
 	public Vehiculo build() {
-		return new Vehiculo(this.placa, this.tipo,this.cilindraje,this.color,this.marca,this.clase);
+		return new Vehiculo(this.placa, this.tipo,this.cilindraje,this.color,this.modelo,this.marca,this.clase,this.fechaIngreso);
 	}
 
 }

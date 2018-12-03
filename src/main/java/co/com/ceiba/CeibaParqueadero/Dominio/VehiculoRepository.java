@@ -12,7 +12,8 @@ public interface VehiculoRepository {
 	public Vehiculo obtenerVehiculoPorPlaca(String placa)  throws ParqueaderoException;
 	public List<Vehiculo> obtenerTodosLosVehiculos();
 	public void eliminarVehiculo(String placa) throws ParqueaderoException;
-	public Long obtenerCantidadVehiculos();
 	public Long obtenerCantidadPorTipo(String tipo);
+	public void eliminarTodo();
+	public Boolean existeVehiculo(String placa);
 
 }

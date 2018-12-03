@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import co.com.ceiba.CeibaParqueadero.Dominio.Modelo.Vehiculo;
+import co.com.ceiba.CeibaParqueadero.Dominio.Validaciones.VehiculoValidador;
 import co.com.ceiba.CeibaParqueadero.Exception.ParqueaderoException;
 
 @Service

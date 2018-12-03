@@ -1,4 +1,4 @@
-package co.com.ceiba.CeibaParqueadero.Dominio.Modelo;
+package co.com.ceiba.CeibaParqueadero.Dominio.Validaciones;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import co.com.ceiba.CeibaParqueadero.Dominio.VehiculoRepository;
-import co.com.ceiba.CeibaParqueadero.Dominio.VehiculoValidador;
+import co.com.ceiba.CeibaParqueadero.Dominio.Modelo.Vehiculo;
 import co.com.ceiba.CeibaParqueadero.Exception.ParqueaderoException;
 import co.com.ceiba.CeibaParqueadero.Util.Constants;
 
 
 @Component
-public class Carro extends VehiculoValidador {
+public class CarroValidador extends VehiculoValidador {
 	
 	
 	@Autowired
@@ -22,7 +22,7 @@ public class Carro extends VehiculoValidador {
 	public static final String TIPO = "carro";
 	public static final String ERROR_DISPONIBILIDAD = "No hay disponibilidad para carros";
 	
-	public Carro() {
+	public CarroValidador() {
 	}
 
 	@Override

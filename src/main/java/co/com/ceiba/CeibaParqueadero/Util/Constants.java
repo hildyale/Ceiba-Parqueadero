@@ -23,5 +23,7 @@ public abstract class Constants {
     public static final String RESTRICCION_DIA_UNO = "Domingo";
     public static final String RESTRICCION_DIA_DOS = "Lunes";
     public static final String RESTRICCION = "No esta Autorizado a Ingresar";
+    public static final String TIPO_CARRO = "carro";
+    public static final String TIPO_MOTO = "moto";
     
 }

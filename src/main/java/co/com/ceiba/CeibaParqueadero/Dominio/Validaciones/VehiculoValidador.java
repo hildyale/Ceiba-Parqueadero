@@ -1,4 +1,4 @@
-package co.com.ceiba.CeibaParqueadero.Dominio;
+package co.com.ceiba.CeibaParqueadero.Dominio.Validaciones;
 
 
 import java.time.Period;

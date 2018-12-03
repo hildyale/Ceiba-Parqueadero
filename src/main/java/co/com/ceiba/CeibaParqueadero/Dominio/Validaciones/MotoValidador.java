@@ -1,4 +1,4 @@
-package co.com.ceiba.CeibaParqueadero.Dominio.Modelo;
+package co.com.ceiba.CeibaParqueadero.Dominio.Validaciones;
 
 import java.util.Date;
 
@@ -10,12 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.stereotype.Component;
 import co.com.ceiba.CeibaParqueadero.Dominio.VehiculoRepository;
-import co.com.ceiba.CeibaParqueadero.Dominio.VehiculoValidador;
+import co.com.ceiba.CeibaParqueadero.Dominio.Modelo.Vehiculo;
 import co.com.ceiba.CeibaParqueadero.Exception.ParqueaderoException;
 import co.com.ceiba.CeibaParqueadero.Util.Constants;
 
 @Component
-public class Moto extends VehiculoValidador {
+public class MotoValidador extends VehiculoValidador {
 	
 	@Autowired
 	VehiculoRepository vehiculoRepository;
@@ -23,7 +23,7 @@ public class Moto extends VehiculoValidador {
 	public static final String TIPO = "moto";
 	public static final String ERROR_DISPONIBILIDAD = "No hay disponibilidad para motos";
 	
-	public Moto() {
+	public MotoValidador() {
 	}
 
 	@Override

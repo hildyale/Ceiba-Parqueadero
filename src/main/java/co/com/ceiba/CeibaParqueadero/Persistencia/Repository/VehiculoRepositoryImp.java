@@ -33,7 +33,7 @@ public class VehiculoRepositoryImp implements VehiculoRepository {
 		vehiculoEntityRepository.save(VehiculoBuilder.convertirAEntity(vehiculo));
 	}
 
-	
+	@Override
 	public Boolean existeVehiculo(String placa) {
 		Optional<VehiculoEntity> vehiculoOptional = vehiculoEntityRepository.findById(placa);
 		return vehiculoOptional.isPresent();
@@ -67,14 +67,13 @@ public class VehiculoRepositoryImp implements VehiculoRepository {
 
 
 	@Override
-	public Long obtenerCantidadVehiculos() {
-		return vehiculoEntityRepository.count();
-	}
-
-
-	@Override
 	public Long obtenerCantidadPorTipo(String tipo) {
 		return vehiculoEntityRepository.countByTipo(tipo);
+	}
+	
+	@Override
+	public void eliminarTodo() {
+		vehiculoEntityRepository.deleteAll();
 	}
 	
 	
