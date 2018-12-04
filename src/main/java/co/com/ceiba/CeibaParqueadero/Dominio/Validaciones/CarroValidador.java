@@ -1,8 +1,5 @@
 package co.com.ceiba.CeibaParqueadero.Dominio.Validaciones;
 
-import java.util.Calendar;
-import java.util.Date;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +11,7 @@ import co.com.ceiba.CeibaParqueadero.Exception.ParqueaderoException;
 import co.com.ceiba.CeibaParqueadero.Util.Constants;
 
 
-@Component
+@Component(value = "carro")
 public class CarroValidador extends VehiculoValidador {
 	
 	

@@ -1,5 +1,8 @@
 package co.com.ceiba.CeibaParqueadero.Controller;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,8 @@ import co.com.ceiba.CeibaParqueadero.Dominio.VehiculoRepository;
 import co.com.ceiba.CeibaParqueadero.Dominio.Vigilante;
 import co.com.ceiba.CeibaParqueadero.Dominio.Modelo.Vehiculo;
 import co.com.ceiba.CeibaParqueadero.Exception.ParqueaderoException;
+import co.com.ceiba.CeibaParqueadero.Persistencia.Builder.VehiculoBuilder;
+import co.com.ceiba.CeibaParqueadero.Persistencia.Modelo.VehiculoEntity;
 import co.com.ceiba.CeibaParqueadero.Util.Constants;
 
 @RestController
@@ -29,7 +34,13 @@ public class VigilanteController {
 	@GetMapping()
 	public Object consultaVehiculos(){
 		try {
-			return vigilante.obtenerTodosLosVehiculos();
+			LinkedList<VehiculoRest> vehiculosRest = new LinkedList<>();
+			List<Vehiculo> vehiculos = vigilante.obtenerTodosLosVehiculos();
+			for(Vehiculo vehiculo: vehiculos){
+				vehiculosRest.add(new VehiculoRest(vehiculo.getPlaca(),vehiculo.getTipo(),vehiculo.getFechaIngreso()));
+			}
+			return vehiculosRest;
+			
 		} catch (Exception e) {
 			Respuesta respuesta = new Respuesta(Constants.STATUS_BAD_REQUEST,e.getMessage());
 			return new ResponseEntity<Respuesta>(respuesta,HttpStatus.BAD_REQUEST);
