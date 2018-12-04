@@ -17,6 +17,7 @@ public class VigilanteImp implements Vigilante {
 		
 	}
 	
+	
 	@Autowired
 	VehiculoFactory vehiculoFactory;
 	
@@ -28,6 +29,9 @@ public class VigilanteImp implements Vigilante {
 		VehiculoValidador vehiculoValidador = vehiculoFactory.getVehiculo(vehiculo.getTipo());
 		vehiculoValidador.validarDisponibilidad();
 		vehiculoValidador.validarPlaca(vehiculo.getPlaca());
+		System.out.println("placa:"+vehiculo.getPlaca());
+		System.out.println("-------dia de la semana-----en vigilante");
+		System.out.println(vehiculoValidador.obtenerDiaDeLaSemana());
 		vehiculoRepository.crearVehiculo(vehiculo);
 	}
 

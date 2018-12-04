@@ -202,8 +202,6 @@ public class vehiculoRepositoryTests {
         //Act
 		vehiculoRepository.crearVehiculo(vehiculo);
 	    cant = vehiculoRepository.obtenerCantidadPorTipo(Constants.TIPO_MOTO);
-    	System.out.println(cant);
-    	System.out.println(vehiculo.toString());
 		//Assert
 		assertEquals(1, cant);
     }

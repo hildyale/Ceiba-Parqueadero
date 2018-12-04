@@ -18,22 +18,27 @@ public abstract class VehiculoValidador {
 	public abstract double calcularValor(Vehiculo vehiculo);
 	
 	public void validarPlaca(String placa) throws ParqueaderoException {
+		System.out.println("validar placa");
 		String primeraLetra = String.valueOf(placa.charAt(0));
 		primeraLetra = primeraLetra.toLowerCase();
-		if(validarLetra(primeraLetra)) {
-			if(obtenerDiaDeLaSemana() != Calendar.MONDAY && obtenerDiaDeLaSemana() != Calendar.SUNDAY) {
+		System.out.println("-------dia de la semana-----en validarplaca");
+		System.out.println(obtenerDiaDeLaSemana());
+		if(validarLetra(primeraLetra) && noEsLunesODomingo()) {
 				throw new ParqueaderoException(Constants.RESTRICCION);
-			}
 		}
 	}
 	
-	private boolean validarLetra(String primeraLetra) {
+	public boolean validarLetra(String primeraLetra) {
 		return primeraLetra.equals(Constants.RESTRICCION_PRIMERA_LETRA);
 	}
 	
-	private int obtenerDiaDeLaSemana() {
+	public int obtenerDiaDeLaSemana() {
 		Calendar calendar = Calendar.getInstance();
 		return calendar.get(Calendar.DAY_OF_WEEK);
+	}
+	
+	public Boolean noEsLunesODomingo() {
+		return obtenerDiaDeLaSemana() != Calendar.MONDAY && obtenerDiaDeLaSemana() != Calendar.SUNDAY;
 	}
 	
 	public Date obtenerFecha() {
