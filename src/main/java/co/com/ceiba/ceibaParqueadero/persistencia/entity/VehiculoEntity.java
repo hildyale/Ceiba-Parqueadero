@@ -53,18 +53,6 @@ public class VehiculoEntity {
 		
 	}
 
-	public VehiculoEntity(String placa, @NotBlank String tipo, int cilindraje, @NotBlank String color, @NotBlank String marca,
-			@NotBlank String clase) {
-		super();
-		this.placa = placa;
-		this.tipo = tipo;
-		this.cilindraje = cilindraje;
-		this.color = color;
-		this.marca = marca;
-		this.clase = clase;
-	}
-
-
 	public String getPlaca() {
 		return placa;
 	}
@@ -124,5 +112,4 @@ public class VehiculoEntity {
 	public Date getFechaIngreso() {
 		return fechaIngreso;
 	}
-
 }

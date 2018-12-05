@@ -13,7 +13,8 @@ public class VehiculoBuilder {
 		
 		if(vehiculoEntity != null) {
 			vehiculo = new Vehiculo();
-			vehiculo.setPlaca(vehiculoEntity.getTipo());
+			vehiculo.setPlaca(vehiculoEntity.getPlaca());
+			vehiculo.setTipo(vehiculoEntity.getTipo());
 			vehiculo.setCilindraje(vehiculoEntity.getCilindraje());
 			vehiculo.setColor(vehiculoEntity.getColor());
 			vehiculo.setModelo(vehiculoEntity.getModelo());

@@ -115,14 +115,56 @@ public class VehiculoValidadorTest {
 	}
 	
 	@Test 
-	public void obtenerValorTest(){
+	public void obtenerValorMenosDeNueveHorasTest(){
 		//arrange
 		Vehiculo vehiculo = new VehiculoTestDataBuilder().build();
 		Date fechaActual = new Date();
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(fechaActual);
-		int cantidadDiasACorrer = 1;
-		int cantidadHorasACorrer = 1;
+		int cantidadDiasACorrer = 0;
+		int cantidadHorasACorrer = 5;
+		
+		//act
+		calendar.set(Calendar.DATE, calendar.get(Calendar.DATE)-cantidadDiasACorrer);
+		calendar.set(Calendar.HOUR, calendar.get(Calendar.HOUR)-cantidadHorasACorrer);
+		Date fechaModificada = calendar.getTime();
+		vehiculo.setFechaIngreso(fechaModificada);
+		double valor = vehiculoValidador.calcularValor(vehiculo);
+		
+		//assert
+		assertEquals((Constants.VALOR_DIA_CARRO*cantidadDiasACorrer)+(Constants.VALOR_HORA_CARRO*cantidadHorasACorrer),valor,0.01);
+	}
+	
+	@Test 
+	public void obtenerValorMenosDeUnDiaMasDeNueveHorasTest(){
+		//arrange
+		Vehiculo vehiculo = new VehiculoTestDataBuilder().build();
+		Date fechaActual = new Date();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(fechaActual);
+		int cantidadDiasACorrer = 0;
+		int cantidadHorasACorrer = 15;
+		
+		//act
+		calendar.set(Calendar.DATE, calendar.get(Calendar.DATE)-cantidadDiasACorrer);
+		calendar.set(Calendar.HOUR, calendar.get(Calendar.HOUR)-cantidadHorasACorrer);
+		Date fechaModificada = calendar.getTime();
+		vehiculo.setFechaIngreso(fechaModificada);
+		double valor = vehiculoValidador.calcularValor(vehiculo);
+		
+		//assert
+		assertEquals(Constants.VALOR_DIA_CARRO,valor,0.01);
+	}
+	
+	@Test 
+	public void obtenerValorMasDeUnDiaTest(){
+		//arrange
+		Vehiculo vehiculo = new VehiculoTestDataBuilder().build();
+		Date fechaActual = new Date();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(fechaActual);
+		int cantidadDiasACorrer = 2;
+		int cantidadHorasACorrer = 5;
 		
 		//act
 		calendar.set(Calendar.DATE, calendar.get(Calendar.DATE)-cantidadDiasACorrer);
