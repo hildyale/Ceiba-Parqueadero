@@ -162,7 +162,6 @@ public class vigilanteTest {
 		vehiculo.setFechaIngreso(fechaModificada);
 		vehiculoRepository.actualizarVehiculo(vehiculo);
 		double valor = vigilante.salidaVehiculo(vehiculo.getPlaca());
-		
 		//assert
 		assertEquals(Constants.VALOR_HORA_CARRO*cantidadHorasACorrer,valor,0.01);
 	}
