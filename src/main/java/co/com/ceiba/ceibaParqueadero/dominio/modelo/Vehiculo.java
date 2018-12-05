@@ -108,4 +108,5 @@ public class Vehiculo{
 	public void setFechaIngreso(Date fechaIngreso) {
 		this.fechaIngreso = fechaIngreso;
 	}
+	
 }

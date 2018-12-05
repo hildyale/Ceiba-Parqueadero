@@ -1,5 +1,7 @@
 package co.com.ceiba.ceibaParqueadero.dominio;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +26,10 @@ public class VigilanteImp implements Vigilante {
 	@Override
 	public void registrarVehiculo(Vehiculo vehiculo) throws ParqueaderoException {
 		String tipo = vehiculo.getTipo();
-		if(!tipo.equals("carro") && !tipo.equals("moto")) {
+		if(!tipo.equals(Constants.TIPO_CARRO) && !tipo.equals(Constants.TIPO_MOTO)) {
 			throw new ParqueaderoException(Constants.SOLO_CARROS_Y_MOTOS);
 		}
-		VehiculoValidador vehiculoValidador = vehiculoFactory.getVehiculo(vehiculo.getTipo());
+		VehiculoValidador vehiculoValidador = vehiculoFactory.getVehiculoValidador(vehiculo.getTipo());
 		vehiculoValidador.validarDisponibilidad();
 		vehiculoValidador.validarPlaca(vehiculo.getPlaca());
 		vehiculoRepository.crearVehiculo(vehiculo);
@@ -36,7 +38,7 @@ public class VigilanteImp implements Vigilante {
 	@Override
 	public double salidaVehiculo(String placa) throws ParqueaderoException {
 		Vehiculo vehiculo = vehiculoRepository.obtenerVehiculoPorPlaca(placa);
-		VehiculoValidador vehiculoValidador = vehiculoFactory.getVehiculo(vehiculo.getTipo());
+		VehiculoValidador vehiculoValidador = vehiculoFactory.getVehiculoValidador(vehiculo.getTipo());
 		double valor = vehiculoValidador.calcularValor(vehiculo);
 		vehiculoRepository.eliminarVehiculo(placa);
 		return valor;

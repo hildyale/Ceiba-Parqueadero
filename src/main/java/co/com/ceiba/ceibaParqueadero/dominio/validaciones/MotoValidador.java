@@ -10,7 +10,7 @@ import co.com.ceiba.ceibaParqueadero.dominio.repository.VehiculoRepository;
 import co.com.ceiba.ceibaParqueadero.exception.ParqueaderoException;
 import co.com.ceiba.ceibaParqueadero.util.Constants;
 
-@Component
+@Component(value = "moto")
 public class MotoValidador implements VehiculoValidador {
 	
 	@Autowired

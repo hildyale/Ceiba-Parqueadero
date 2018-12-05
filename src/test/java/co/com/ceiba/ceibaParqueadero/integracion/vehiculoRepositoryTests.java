@@ -5,7 +5,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.text.ParseException;
 import java.util.Calendar;
 import java.util.List;
 
@@ -37,7 +36,7 @@ public class vehiculoRepositoryTests {
 	}
 	
 	@Test
-	public void guardarYObtenerVehiculo() throws ParqueaderoException {
+	public void guardarVehiculo() throws ParqueaderoException {
 		
 		//Arrange
     	Vehiculo vehiculo = new VehiculoTestDataBuilder().build();
@@ -52,6 +51,25 @@ public class vehiculoRepositoryTests {
         
         //Assert
         assertEquals(calendarActual.get(Calendar.DAY_OF_YEAR),calendarEncontrado.get(Calendar.DAY_OF_YEAR));
+    }
+	
+	@Test
+	public void actualizarVehiculo() throws ParqueaderoException {
+		
+		//Arrange
+    	Vehiculo vehiculo = new VehiculoTestDataBuilder().build();
+    	Calendar calendarActual = Calendar.getInstance();
+        Calendar calendarEncontrado = Calendar.getInstance();
+        
+        //Act
+        vehiculoRepository.crearVehiculo(vehiculo);
+        vehiculo = vehiculoRepository.obtenerVehiculoPorPlaca(vehiculo.getPlaca());
+        vehiculo.setCilindraje(2200);
+        vehiculoRepository.actualizarVehiculo(vehiculo);
+        Vehiculo vehiculoEncontrado = vehiculoRepository.obtenerVehiculoPorPlaca(vehiculo.getPlaca());
+        
+        //Assert
+        assertEquals(vehiculoEncontrado.getCilindraje(),vehiculo.getCilindraje());
     }
 	
 	@Test

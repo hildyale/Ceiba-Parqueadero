@@ -29,7 +29,6 @@ public class VehiculoBuilder {
 	public static VehiculoEntity convertirAEntity(Vehiculo vehiculo) {
 		
 		VehiculoEntity vehiculoEntity = new VehiculoEntity();
-		
 		vehiculoEntity.setPlaca(vehiculo.getPlaca());
 		vehiculoEntity.setTipo(vehiculo.getTipo());
 		vehiculoEntity.setCilindraje(vehiculo.getCilindraje());
@@ -37,6 +36,7 @@ public class VehiculoBuilder {
 		vehiculoEntity.setModelo(vehiculo.getModelo());
 		vehiculoEntity.setMarca(vehiculo.getMarca());
 		vehiculoEntity.setClase(vehiculo.getClase());
+		vehiculoEntity.setFechaIngreso(vehiculo.getFechaIngreso());
 		return vehiculoEntity;
 	}
 

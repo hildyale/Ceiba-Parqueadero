@@ -3,10 +3,7 @@ package co.com.ceiba.ceibaParqueadero.integracion;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -17,16 +14,12 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import co.com.ceiba.ceibaParqueadero.dataBuilder.VehiculoTestDataBuilder;
 import co.com.ceiba.ceibaParqueadero.dominio.Vigilante;
-import co.com.ceiba.ceibaParqueadero.dominio.factory.VehiculoFactory;
 import co.com.ceiba.ceibaParqueadero.dominio.modelo.Vehiculo;
 import co.com.ceiba.ceibaParqueadero.dominio.repository.VehiculoRepository;
-import co.com.ceiba.ceibaParqueadero.dominio.validaciones.CarroValidador;
-import co.com.ceiba.ceibaParqueadero.dominio.validaciones.VehiculoValidador;
 import co.com.ceiba.ceibaParqueadero.exception.ParqueaderoException;
 import co.com.ceiba.ceibaParqueadero.util.Constants;
 
@@ -151,5 +144,160 @@ public class vigilanteTest {
 		//asset
 		assertEquals(1,vehiculos.size());
 	}
+	
+
+	@Test 
+	public void salidaCarroMenosDe9HorasTest() throws ParqueaderoException, InterruptedException{
+		//arrange
+		Vehiculo vehiculo = new VehiculoTestDataBuilder().build();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(vehiculo.getFechaIngreso());
+		int cantidadHorasACorrer = 5;
+		
+		//act
+		vehiculoRepository.crearVehiculo(vehiculo);
+		vehiculo = vehiculoRepository.obtenerVehiculoPorPlaca(vehiculo.getPlaca());
+		calendar.set(Calendar.HOUR, calendar.get(Calendar.HOUR)-cantidadHorasACorrer);
+		Date fechaModificada = calendar.getTime();
+		vehiculo.setFechaIngreso(fechaModificada);
+		vehiculoRepository.actualizarVehiculo(vehiculo);
+		double valor = vigilante.salidaVehiculo(vehiculo.getPlaca());
+		
+		//assert
+		assertEquals(Constants.VALOR_HORA_CARRO*cantidadHorasACorrer,valor,0.01);
+	}
+	
+
+	@Test 
+	public void salidaMotoMenosDe9HorasTest() throws ParqueaderoException{
+		//arrange
+		Vehiculo vehiculo = new VehiculoTestDataBuilder().conCilindraje(400).conTipo(Constants.TIPO_MOTO).build();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(vehiculo.getFechaIngreso());
+		int cantidadHorasACorrer = 5;
+		
+		//act
+		vehiculoRepository.crearVehiculo(vehiculo);
+		vehiculo = vehiculoRepository.obtenerVehiculoPorPlaca(vehiculo.getPlaca());
+		calendar.set(Calendar.HOUR, calendar.get(Calendar.HOUR)-cantidadHorasACorrer);
+		Date fechaModificada = calendar.getTime();
+		vehiculo.setFechaIngreso(fechaModificada);
+		vehiculoRepository.actualizarVehiculo(vehiculo);
+		double valor = vigilante.salidaVehiculo(vehiculo.getPlaca());
+		
+		//assert
+		assertEquals(Constants.VALOR_HORA_MOTO*cantidadHorasACorrer,valor,0.01);
+	}
+	
+
+	@Test 
+	public void salidaMotoMenosDe9HorasYCilindrajeMayorTest() throws ParqueaderoException{
+		//arrange
+		Vehiculo vehiculo = new VehiculoTestDataBuilder().conCilindraje(600).conTipo(Constants.TIPO_MOTO).build();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(vehiculo.getFechaIngreso());
+		int cantidadHorasACorrer = 5;
+		
+		//act
+		vehiculoRepository.crearVehiculo(vehiculo);
+		vehiculo = vehiculoRepository.obtenerVehiculoPorPlaca(vehiculo.getPlaca());
+		calendar.set(Calendar.HOUR, calendar.get(Calendar.HOUR)-cantidadHorasACorrer);
+		Date fechaModificada = calendar.getTime();
+		vehiculo.setFechaIngreso(fechaModificada);
+		vehiculoRepository.actualizarVehiculo(vehiculo);
+		double valor = vigilante.salidaVehiculo(vehiculo.getPlaca());
+		
+		//assert
+		assertEquals((Constants.VALOR_HORA_MOTO*cantidadHorasACorrer)+Constants.RECARGO_MOTO,valor,0.01);
+	}
+	
+	@Test 
+	public void salidaDeCarroEntre9Y24HorasTest() throws ParqueaderoException{
+		//arrange
+		Vehiculo vehiculo = new VehiculoTestDataBuilder().build();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(vehiculo.getFechaIngreso());
+		int cantidadHorasACorrer = 15;
+		
+		//act
+		vehiculoRepository.crearVehiculo(vehiculo);
+		vehiculo = vehiculoRepository.obtenerVehiculoPorPlaca(vehiculo.getPlaca());
+		calendar.set(Calendar.HOUR, calendar.get(Calendar.HOUR)-cantidadHorasACorrer);
+		Date fechaModificada = calendar.getTime();
+		vehiculo.setFechaIngreso(fechaModificada);
+		vehiculoRepository.actualizarVehiculo(vehiculo);
+		double valor = vigilante.salidaVehiculo(vehiculo.getPlaca());
+		
+		//assert
+		assertEquals(Constants.VALOR_DIA_CARRO,valor,0.01);
+	}
+	
+	@Test 
+	public void salidaDeMotoEntre9Y24HorasTest() throws ParqueaderoException{
+		//arrange
+		Vehiculo vehiculo = new VehiculoTestDataBuilder().conCilindraje(400).conTipo(Constants.TIPO_MOTO).build();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(vehiculo.getFechaIngreso());
+		int cantidadHorasACorrer = 15;
+		
+		//act
+		vehiculoRepository.crearVehiculo(vehiculo);
+		vehiculo = vehiculoRepository.obtenerVehiculoPorPlaca(vehiculo.getPlaca());
+		calendar.set(Calendar.HOUR, calendar.get(Calendar.HOUR)-cantidadHorasACorrer);
+		Date fechaModificada = calendar.getTime();
+		vehiculo.setFechaIngreso(fechaModificada);
+		vehiculoRepository.actualizarVehiculo(vehiculo);
+		double valor = vigilante.salidaVehiculo(vehiculo.getPlaca());
+		
+		//assert
+		assertEquals(Constants.VALOR_DIA_MOTO,valor,0.01);
+	}
+	
+	@Test 
+	public void salidaDeCarroMasDeUnDiaTest() throws ParqueaderoException{
+		//arrange
+		Vehiculo vehiculo = new VehiculoTestDataBuilder().build();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(vehiculo.getFechaIngreso());
+		int cantidadHorasACorrer = 6;
+		int cantidadDiasACorrer = 1;
+		
+		//act
+		vehiculoRepository.crearVehiculo(vehiculo);
+		vehiculo = vehiculoRepository.obtenerVehiculoPorPlaca(vehiculo.getPlaca());
+		calendar.set(Calendar.DATE, calendar.get(Calendar.DATE)-cantidadDiasACorrer);
+		calendar.set(Calendar.HOUR, calendar.get(Calendar.HOUR)-cantidadHorasACorrer);
+		Date fechaModificada = calendar.getTime();
+		vehiculo.setFechaIngreso(fechaModificada);
+		vehiculoRepository.actualizarVehiculo(vehiculo);
+		double valor = vigilante.salidaVehiculo(vehiculo.getPlaca());
+		
+		//assert
+		assertEquals((Constants.VALOR_DIA_CARRO*cantidadDiasACorrer)+(Constants.VALOR_HORA_CARRO*cantidadHorasACorrer),valor,0.01);
+	}
+	
+	@Test 
+	public void salidaDeMotoMasDeUnDiaTest() throws ParqueaderoException{
+		//arrange
+		Vehiculo vehiculo = new VehiculoTestDataBuilder().conCilindraje(400).conTipo(Constants.TIPO_MOTO).build();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(vehiculo.getFechaIngreso());
+		int cantidadHorasACorrer = 6;
+		int cantidadDiasACorrer = 1;
+		
+		//act
+		vehiculoRepository.crearVehiculo(vehiculo);
+		vehiculo = vehiculoRepository.obtenerVehiculoPorPlaca(vehiculo.getPlaca());
+		calendar.set(Calendar.DATE, calendar.get(Calendar.DATE)-cantidadDiasACorrer);
+		calendar.set(Calendar.HOUR, calendar.get(Calendar.HOUR)-cantidadHorasACorrer);
+		Date fechaModificada = calendar.getTime();
+		vehiculo.setFechaIngreso(fechaModificada);
+		vehiculoRepository.actualizarVehiculo(vehiculo);
+		double valor = vigilante.salidaVehiculo(vehiculo.getPlaca());
+		
+		//assert
+		assertEquals((Constants.VALOR_DIA_MOTO*cantidadDiasACorrer)+(Constants.VALOR_HORA_MOTO*cantidadHorasACorrer),valor,0.01);
+	}
+	
 
 }

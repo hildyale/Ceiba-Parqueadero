@@ -7,6 +7,7 @@ import co.com.ceiba.ceibaParqueadero.dominio.validaciones.CarroValidador;
 import co.com.ceiba.ceibaParqueadero.dominio.validaciones.MotoValidador;
 import co.com.ceiba.ceibaParqueadero.dominio.validaciones.VehiculoValidador;
 import co.com.ceiba.ceibaParqueadero.exception.ParqueaderoException;
+import co.com.ceiba.ceibaParqueadero.util.Constants;
 
 @Component
 public class VehiculoFactory {
@@ -17,8 +18,8 @@ public class VehiculoFactory {
 	@Autowired
 	MotoValidador motoValidador;
 	
-	public VehiculoValidador getVehiculo(String tipo) throws ParqueaderoException {
-		if(tipo.equals("carro")) {
+	public VehiculoValidador getVehiculoValidador(String tipo) throws ParqueaderoException {
+		if(tipo.equals(Constants.TIPO_CARRO)) {
 			return carroValidador;
 		}
 		else{

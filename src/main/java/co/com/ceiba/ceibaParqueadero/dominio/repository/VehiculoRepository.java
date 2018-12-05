@@ -15,5 +15,6 @@ public interface VehiculoRepository {
 	public Long obtenerCantidadPorTipo(String tipo);
 	public void eliminarTodo();
 	public Boolean existeVehiculo(String placa);
+	void actualizarVehiculo(Vehiculo vehiculo) throws ParqueaderoException;
 
 }

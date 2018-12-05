@@ -71,6 +71,14 @@ public class VehiculoRepositoryImp implements VehiculoRepository {
 		vehiculoEntityRepository.deleteAll();
 	}
 	
+
+	@Override
+	public void actualizarVehiculo(Vehiculo vehiculo) throws ParqueaderoException {
+		if(!existeVehiculo(vehiculo.getPlaca())) {
+			throw new ParqueaderoException(Constants.ERROR_VEHICULO_NO_EXISTE);
+		}
+		vehiculoEntityRepository.save(VehiculoBuilder.convertirAEntity(vehiculo));
+	}
 	
 
 }

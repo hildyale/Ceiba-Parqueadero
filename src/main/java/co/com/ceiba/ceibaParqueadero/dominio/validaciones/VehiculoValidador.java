@@ -42,8 +42,13 @@ public interface VehiculoValidador {
 		int mins = (int) (secs / 60);
 		if(mins>0) {
 			hours++;
+			return hours;
 		}
-		//secs = secs % 60;
+		secs = secs % 60;
+		if(secs>0) {
+			hours++;
+			return hours;
+		}
 		return hours;
 	}
 	
