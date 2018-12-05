@@ -44,11 +44,13 @@ public interface VehiculoValidador {
 			hours++;
 			return hours;
 		}
+		/*
 		secs = secs % 60;
 		if(secs>0) {
 			hours++;
 			return hours;
 		}
+		*/
 		return hours;
 	}
 	
