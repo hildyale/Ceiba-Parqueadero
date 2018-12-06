@@ -43,16 +43,7 @@ pipeline {
 		stage('Unit Tests') {
 			steps{
 				echo "------------>Unit Tests<------------"
-				sh 'gradle --stacktrace test --tests co.com.ceiba.ceibaParqueadero.unitarias*'
-				junit '**/build/test-results/test/*.xml' //aggregate test results - JUnit
-				step( [ $class: 'JacocoPublisher' ] )
-			}
-		}
-		
-		stage('integration Tests') {
-			steps{
-				echo "------------>Unit Tests<------------"
-				sh 'gradle --stacktrace test --tests co.com.ceiba.ceibaParqueadero.integracion*'
+				sh 'gradle --stacktrace test'
 				junit '**/build/test-results/test/*.xml' //aggregate test results - JUnit
 				step( [ $class: 'JacocoPublisher' ] )
 			}

@@ -4,13 +4,17 @@ package co.com.ceiba.ceibaParqueadero.unitarias;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
 import java.util.Calendar;
 import java.util.Date;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -37,6 +41,15 @@ public class VehiculoValidadorTest {
 	@Autowired
 	@Qualifier("moto")
 	VehiculoValidador motoValidador;
+	
+	VehiculoValidador vehiculoValidadorSpy;
+	
+	@Before 
+	public void initMocks() {
+        MockitoAnnotations.initMocks(this);
+        vehiculoValidadorSpy = Mockito.spy(vehiculoValidador);
+    }
+	
 	/*
 	@MockBean
 	VehiculoRepository vehiculoRepository;*/
@@ -233,5 +246,56 @@ public class VehiculoValidadorTest {
 		
 		//assert
 		assertEquals((Constants.VALOR_DIA_MOTO*cantidadDiasACorrer)+(Constants.VALOR_HORA_MOTO*cantidadHorasACorrer),valor,0.01);
+	}
+	
+	@Test
+	public void validarPlacaDomingoTest() throws ParqueaderoException {
+		//arrange
+		String placa = "abc123";
+		doReturn(Calendar.SUNDAY).when(vehiculoValidadorSpy).obtenerDiaDeLaSemana();
+		
+		//act
+		try {
+			vehiculoValidadorSpy.validarPlaca(placa);
+			
+		//assert
+			return;
+		}catch (ParqueaderoException e) {
+			fail(e.getMessage());
+		}	
+	}
+	
+	@Test
+	public void validarPlacaLunesTest() throws ParqueaderoException {
+		//arrange
+		String placa = "abc123";
+		doReturn(Calendar.MONDAY).when(vehiculoValidadorSpy).obtenerDiaDeLaSemana();
+		
+		//act
+		try {
+			vehiculoValidadorSpy.validarPlaca(placa);
+			
+		//assert
+			return;
+		}catch (ParqueaderoException e) {
+			fail(e.getMessage());
+		}	
+	}
+	
+	@Test
+	public void validarPlacaJuevesTest() throws ParqueaderoException {
+		//arrange
+		String placa = "abc123";
+		doReturn(Calendar.THURSDAY).when(vehiculoValidadorSpy).obtenerDiaDeLaSemana();
+		
+		//act
+		try {
+			vehiculoValidadorSpy.validarPlaca(placa);
+			fail();
+		//assert
+			return;
+		}catch (ParqueaderoException e) {
+			assertEquals(Constants.RESTRICCION,e.getMessage());
+		}	
 	}
 }

@@ -147,7 +147,7 @@ public class vigilanteTest {
 	
 
 	@Test 
-	public void salidaCarroMenosDe9HorasTest() throws ParqueaderoException, InterruptedException{
+	public void salidaCarroMenosDe9HorasTest() throws ParqueaderoException{
 		//arrange
 		Vehiculo vehiculo = new VehiculoTestDataBuilder().build();
 		Calendar calendar = Calendar.getInstance();
