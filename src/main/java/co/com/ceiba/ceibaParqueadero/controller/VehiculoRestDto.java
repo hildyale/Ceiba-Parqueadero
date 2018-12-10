@@ -2,17 +2,17 @@ package co.com.ceiba.ceibaParqueadero.controller;
 
 import java.util.Date;
 
-public class VehiculoRest {
+public class VehiculoRestDto {
 
 	private String placa;
 	private String tipo;
 	private Date fechaIngreso;
 	
-	public VehiculoRest() {
+	public VehiculoRestDto() {
 		
 	}
 
-	public VehiculoRest(String placa, String tipo, Date fechaIngreso) {
+	public VehiculoRestDto(String placa, String tipo, Date fechaIngreso) {
 		super();
 		this.placa = placa;
 		this.tipo = tipo;

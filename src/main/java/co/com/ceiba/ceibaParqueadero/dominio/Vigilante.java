@@ -1,5 +1,6 @@
 package co.com.ceiba.ceibaParqueadero.dominio;
 
+import java.text.ParseException;
 import java.util.List;
 
 import co.com.ceiba.ceibaParqueadero.dominio.modelo.Vehiculo;

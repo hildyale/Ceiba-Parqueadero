@@ -45,7 +45,7 @@ public class VehiculoRepositoryImp implements VehiculoRepository {
 	@Override
 	public List<Vehiculo> obtenerTodosLosVehiculos(){
 		LinkedList<Vehiculo> vehiculos = new LinkedList<>();
-		List<VehiculoEntity> vehiculosEntity = vehiculoEntityRepository.findAll();
+		List<VehiculoEntity> vehiculosEntity = vehiculoEntityRepository.findAllByOrderByFechaIngresoDesc();
 		for(VehiculoEntity vehiculoEntity: vehiculosEntity){
 			vehiculos.add(VehiculoBuilder.convertirADominio(vehiculoEntity));
 		}
