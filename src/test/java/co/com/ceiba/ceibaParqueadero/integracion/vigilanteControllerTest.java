@@ -15,7 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import co.com.ceiba.ceibaParqueadero.dominio.repository.VehiculoRepository;
+import co.com.ceiba.ceibaParqueadero.persistencia.repository.VehiculoRepository;
 
 
 @RunWith(SpringRunner.class)

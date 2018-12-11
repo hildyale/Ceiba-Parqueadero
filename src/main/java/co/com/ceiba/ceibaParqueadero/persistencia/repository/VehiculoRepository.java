@@ -1,4 +1,4 @@
-package co.com.ceiba.ceibaParqueadero.dominio.repository;
+package co.com.ceiba.ceibaParqueadero.persistencia.repository;
 
 import java.util.List;
 

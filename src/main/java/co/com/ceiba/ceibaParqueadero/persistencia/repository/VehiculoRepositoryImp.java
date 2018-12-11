@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import co.com.ceiba.ceibaParqueadero.dominio.modelo.Vehiculo;
-import co.com.ceiba.ceibaParqueadero.dominio.repository.VehiculoRepository;
 import co.com.ceiba.ceibaParqueadero.exception.ParqueaderoException;
 import co.com.ceiba.ceibaParqueadero.persistencia.builder.VehiculoBuilder;
 import co.com.ceiba.ceibaParqueadero.persistencia.entity.VehiculoEntity;

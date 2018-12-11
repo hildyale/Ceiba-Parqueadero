@@ -18,8 +18,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import co.com.ceiba.ceibaParqueadero.dataBuilder.VehiculoTestDataBuilder;
 import co.com.ceiba.ceibaParqueadero.dominio.modelo.Vehiculo;
-import co.com.ceiba.ceibaParqueadero.dominio.repository.VehiculoRepository;
 import co.com.ceiba.ceibaParqueadero.exception.ParqueaderoException;
+import co.com.ceiba.ceibaParqueadero.persistencia.repository.VehiculoRepository;
 import co.com.ceiba.ceibaParqueadero.util.Constants;
 
 @RunWith(SpringRunner.class)

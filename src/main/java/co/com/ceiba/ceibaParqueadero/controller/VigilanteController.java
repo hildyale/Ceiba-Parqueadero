@@ -2,7 +2,6 @@ package co.com.ceiba.ceibaParqueadero.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.validation.Valid;
 
 import org.json.JSONException;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import co.com.ceiba.ceibaParqueadero.dominio.Vigilante;
 import co.com.ceiba.ceibaParqueadero.dominio.modelo.Vehiculo;
 import co.com.ceiba.ceibaParqueadero.exception.ParqueaderoException;
