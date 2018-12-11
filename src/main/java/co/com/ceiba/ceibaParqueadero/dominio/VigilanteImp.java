@@ -1,5 +1,6 @@
 package co.com.ceiba.ceibaParqueadero.dominio;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import co.com.ceiba.ceibaParqueadero.dominio.factory.VehiculoFactory;
 import co.com.ceiba.ceibaParqueadero.dominio.modelo.Vehiculo;
 import co.com.ceiba.ceibaParqueadero.dominio.validaciones.VehiculoValidador;
 import co.com.ceiba.ceibaParqueadero.exception.ParqueaderoException;
+import co.com.ceiba.ceibaParqueadero.persistencia.builder.VehiculoBuilder;
+import co.com.ceiba.ceibaParqueadero.persistencia.entity.VehiculoEntity;
 import co.com.ceiba.ceibaParqueadero.persistencia.repository.VehiculoRepository;
 import co.com.ceiba.ceibaParqueadero.util.Constants;
 
@@ -23,13 +26,9 @@ public class VigilanteImp implements Vigilante {
 	
 	@Override
 	public void registrarVehiculo(Vehiculo vehiculo) throws ParqueaderoException {
-		String tipo = vehiculo.getTipo();
-		if(!tipo.equals(Constants.TIPO_CARRO) && !tipo.equals(Constants.TIPO_MOTO)) {
-			throw new ParqueaderoException(Constants.SOLO_CARROS_Y_MOTOS);
-		}
+		validarTipo(vehiculo.getTipo());		
 		VehiculoValidador vehiculoValidador = vehiculoFactory.getVehiculoValidador(vehiculo.getTipo());
-		vehiculoValidador.validarDisponibilidad();
-		vehiculoValidador.validarPlaca(vehiculo.getPlaca());
+		vehiculoValidador.validarVehiculo(vehiculo);
 		vehiculoRepository.crearVehiculo(vehiculo);
 	}
 
@@ -38,7 +37,7 @@ public class VigilanteImp implements Vigilante {
 		Vehiculo vehiculo = vehiculoRepository.obtenerVehiculoPorPlaca(placa);
 		VehiculoValidador vehiculoValidador = vehiculoFactory.getVehiculoValidador(vehiculo.getTipo());
 		double valor = vehiculoValidador.calcularValor(vehiculo);
-		vehiculoRepository.eliminarVehiculo(placa);
+		vehiculoRepository.eliminarVehiculo(vehiculo);
 		return valor;
 	}
 
@@ -46,6 +45,12 @@ public class VigilanteImp implements Vigilante {
 	@Override
 	public List<Vehiculo> obtenerTodosLosVehiculos(){
 		return vehiculoRepository.obtenerTodosLosVehiculos();
+	}
+	
+	public void validarTipo(String tipo) throws ParqueaderoException {
+		if(!tipo.equals(Constants.TIPO_CARRO) && !tipo.equals(Constants.TIPO_MOTO)) {
+			throw new ParqueaderoException(Constants.SOLO_CARROS_Y_MOTOS);
+		}
 	}
 
 }

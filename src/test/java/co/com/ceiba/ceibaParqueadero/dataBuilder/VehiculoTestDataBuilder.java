@@ -1,11 +1,8 @@
 package co.com.ceiba.ceibaParqueadero.dataBuilder;
 
-import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
-
 import java.util.Date;
 
 import co.com.ceiba.ceibaParqueadero.dominio.modelo.Vehiculo;
-import co.com.ceiba.ceibaParqueadero.persistencia.repository.VehiculoRepositoryImp;
 
 public class VehiculoTestDataBuilder {
 

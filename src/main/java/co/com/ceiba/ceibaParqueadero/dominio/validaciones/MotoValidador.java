@@ -11,7 +11,7 @@ import co.com.ceiba.ceibaParqueadero.persistencia.repository.VehiculoRepository;
 import co.com.ceiba.ceibaParqueadero.util.Constants;
 
 @Component(value = "moto")
-public class MotoValidador implements VehiculoValidador {
+public class MotoValidador extends VehiculoValidador {
 	
 	@Autowired
 	VehiculoRepository vehiculoRepository;

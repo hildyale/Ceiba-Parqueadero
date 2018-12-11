@@ -58,8 +58,6 @@ public class vehiculoRepositoryTests {
 		
 		//Arrange
     	Vehiculo vehiculo = new VehiculoTestDataBuilder().build();
-    	Calendar calendarActual = Calendar.getInstance();
-        Calendar calendarEncontrado = Calendar.getInstance();
         
         //Act
         vehiculoRepository.crearVehiculo(vehiculo);
@@ -70,24 +68,6 @@ public class vehiculoRepositoryTests {
         
         //Assert
         assertEquals(vehiculoEncontrado.getCilindraje(),vehiculo.getCilindraje());
-    }
-	
-	@Test
-	public void guardarExistente() throws ParqueaderoException {
-		
-		//Arrange
-    	Vehiculo vehiculo = new VehiculoTestDataBuilder().build();
-        
-        //Act
-    	try {
-	        vehiculoRepository.crearVehiculo(vehiculo);
-	        vehiculoRepository.crearVehiculo(vehiculo);
-	        fail();
-    	}catch (Exception e) {
-		//Assert
-    		
-			assertEquals(Constants.ERROR_VEHICULO_YA_EXISTE, e.getMessage());
-		}
     }
 	
 
@@ -109,20 +89,6 @@ public class vehiculoRepositoryTests {
     }
 	
 	@Test
-	public void obtenerNoExistente() throws ParqueaderoException {
-		
-		//Arrange
-		String placa = "joj123";
-    	Boolean existe = true;
-    	
-        //Act
-	    existe = vehiculoRepository.existeVehiculo(placa);
-
-		//Assert
-		assertFalse(existe);
-    }
-	
-	@Test
 	public void guardarYVerificarQueExiste() throws ParqueaderoException {
 		
 		//Arrange
@@ -130,10 +96,10 @@ public class vehiculoRepositoryTests {
         
         //Act
         vehiculoRepository.crearVehiculo(vehiculo);
-        Boolean existe = vehiculoRepository.existeVehiculo(vehiculo.getPlaca()); 
+        Vehiculo vehiculoEncontrado = vehiculoRepository.obtenerVehiculoPorPlaca(vehiculo.getPlaca()); 
         
         //Assert
-        assertTrue(existe);
+        assertEquals(vehiculo.getPlaca(),vehiculoEncontrado.getPlaca());
     }
 	
 	@Test
@@ -174,7 +140,7 @@ public class vehiculoRepositoryTests {
     	
         //Act
 		vehiculoRepository.crearVehiculo(vehiculo);
-	    vehiculoRepository.eliminarVehiculo(vehiculo.getPlaca());
+	    vehiculoRepository.eliminarVehiculo(vehiculo);
 
 		//Assert
 		return;
@@ -188,7 +154,7 @@ public class vehiculoRepositoryTests {
     	
         //Act
     	try {
-	        vehiculoRepository.eliminarVehiculo(vehiculo.getPlaca());
+	        vehiculoRepository.eliminarVehiculo(vehiculo);
     	}catch (Exception e) {
     		
 		//Assert

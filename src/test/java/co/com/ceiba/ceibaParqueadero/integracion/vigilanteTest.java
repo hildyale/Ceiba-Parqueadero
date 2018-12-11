@@ -58,10 +58,10 @@ public class vigilanteTest {
 		
 		//act
 		vigilante.registrarVehiculo(vehiculo);
-		Boolean existe = vehiculoRepository.existeVehiculo(vehiculo.getPlaca());
+		Vehiculo vehiculoEncontrado = vehiculoRepository.obtenerVehiculoPorPlaca(vehiculo.getPlaca());
 		
 		//assert
-		assertTrue(existe);
+		assertEquals(vehiculo.getPlaca(),vehiculoEncontrado.getPlaca());
 	}
 	
 	@Test 

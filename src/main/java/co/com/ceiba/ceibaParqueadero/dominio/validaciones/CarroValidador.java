@@ -12,7 +12,7 @@ import co.com.ceiba.ceibaParqueadero.util.Constants;
 
 
 @Component(value = "carro")
-public class CarroValidador implements VehiculoValidador {
+public class CarroValidador extends VehiculoValidador {
 	
 	
 	@Autowired
