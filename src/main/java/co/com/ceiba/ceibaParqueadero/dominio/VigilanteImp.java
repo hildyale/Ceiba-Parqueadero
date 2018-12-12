@@ -14,6 +14,7 @@ import co.com.ceiba.ceibaParqueadero.persistencia.builder.VehiculoBuilder;
 import co.com.ceiba.ceibaParqueadero.persistencia.entity.VehiculoEntity;
 import co.com.ceiba.ceibaParqueadero.persistencia.repository.VehiculoRepository;
 import co.com.ceiba.ceibaParqueadero.util.Constants;
+import co.com.ceiba.ceibaParqueadero.util.Tipos;
 
 @Service
 public class VigilanteImp implements Vigilante {
@@ -48,7 +49,8 @@ public class VigilanteImp implements Vigilante {
 	}
 	
 	public void validarTipo(String tipo) throws ParqueaderoException {
-		if(!tipo.equals(Constants.TIPO_CARRO) && !tipo.equals(Constants.TIPO_MOTO)) {
+		tipo = tipo.toLowerCase();
+		if(!Tipos.contains(tipo)) {
 			throw new ParqueaderoException(Constants.SOLO_CARROS_Y_MOTOS);
 		}
 	}
